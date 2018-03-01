@@ -1,0 +1,22 @@
+*.class
+
+# Package Files #
+.idea/
+
+# from  data-quality-ee/.gitignore
+.DS_Store
+target/
+bin/
+class/
+dist/
+.settings/
+.idea/
+*.ipr
+*.iml
+*.iws
+*.jardesc
+*.directory
+.cache*
+/.project
+*~
+
