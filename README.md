@@ -68,5 +68,5 @@ To test you can check
  - Dockerize
  - Kubernetes and so on
 
-## More infos
+## More information
 https://projects.spring.io/spring-cloud/
