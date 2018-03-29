@@ -20,6 +20,7 @@ Service registry
 
 ## employeeBackend
 Simple rest application
+It can be refreshed by calling POST http://localhost:9092/refresh
 
 ## employeeDashboard
 
