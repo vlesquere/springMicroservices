@@ -1,0 +1,46 @@
+version: '2'
+
+services:
+  configServer:
+    image: "config-server:1.0-SNAPSHOT"
+    ports:
+      - "9090:9090"
+
+  eureka:
+    image: "eureka:1.0-SNAPSHOT"
+    ports:
+      - "9091:9091"
+
+  gateway:
+    image: "gateway:1.0-SNAPSHOT"
+    ports:
+      - "9094:9094"
+    links:
+      - eureka
+    environment:
+      - EUREKA_URI=http://eureka:9091/eureka
+
+  employeeDashboard:
+    image: "employee-dashboard:1.0-SNAPSHOT"
+    ports:
+      - "9093:9093"
+    links:
+      - eureka
+      - configServer
+    environment:
+      - CLOUD_CONFIG_URI=http://configServer:9090
+      - EUREKA_URI=http://eureka:9091/eureka
+
+  employeeBackend:
+    image: "employee-backend:1.0-SNAPSHOT"
+    ports:
+      - "9092:9092"
+    depends_on:
+      - eureka
+      - configServer
+    links:
+      - eureka
+      - configServer
+    environment:
+      - CLOUD_CONFIG_URI=http://configServer:9090
+      - EUREKA_URI=http://eureka:9091/eureka
