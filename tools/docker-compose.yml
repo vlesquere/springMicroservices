@@ -19,6 +19,7 @@ services:
       - eureka
     environment:
       - EUREKA_URI=http://eureka:9091/eureka
+      - ZIPKIN_URI=http://zipkin:9411
 
   employeeDashboard:
     image: "employee-dashboard:1.0-SNAPSHOT"
@@ -30,6 +31,7 @@ services:
     environment:
       - CLOUD_CONFIG_URI=http://configServer:9090
       - EUREKA_URI=http://eureka:9091/eureka
+      - ZIPKIN_URI=http://zipkin:9411
 
   employeeBackend:
     image: "employee-backend:1.0-SNAPSHOT"
@@ -44,3 +46,19 @@ services:
     environment:
       - CLOUD_CONFIG_URI=http://configServer:9090
       - EUREKA_URI=http://eureka:9091/eureka
+      - ZIPKIN_URI=http://zipkin:9411
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    # Environment settings are defined here https://github.com/openzipkin/zipkin/tree/1.19.0/zipkin-server#environment-variables
+    environment:
+      - STORAGE_TYPE=mem
+      # Uncomment to disable scribe
+      # - SCRIBE_ENABLED=false
+      # Uncomment to enable self-tracing
+      # - SELF_TRACING_ENABLED=true
+      # Uncomment to enable debug logging
+      # - JAVA_OPTS=-Dlogging.level.zipkin=DEBUG
+    ports:
+      - "9411:9411"
