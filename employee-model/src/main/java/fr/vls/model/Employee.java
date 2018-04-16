@@ -1,18 +1,23 @@
 package fr.vls.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class Employee {
 
-    private Long employeeId;
+    @Id
+    private String employeeId;
     private String name;
     private String practiceArea;
     private String designation;
     private String companyInfo;
 
-    public Long getEmployeeId() {
+    public String getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(Long employeeId) {
+    public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
     }
 
