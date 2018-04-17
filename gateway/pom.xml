@@ -45,7 +45,10 @@
         </dependency>
     </dependencies>
 
-    <build>
+    <profiles>
+      <profile>
+      <id>docker</id>
+      <build>
         <plugins>
             <plugin>
                 <groupId>com.spotify</groupId>
@@ -68,5 +71,17 @@
                 </executions>
             </plugin>
         </plugins>
+      </build>
+      </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
+
 </project>

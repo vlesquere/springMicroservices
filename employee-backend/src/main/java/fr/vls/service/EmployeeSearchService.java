@@ -10,18 +10,19 @@ import java.util.stream.Stream;
 
 @Service
 public class EmployeeSearchService {
-    private static Map<Long, Employee> EmployeeRepsitory = null;
+    private static Map<String, Employee> employeeRepository = null;
 
     static {
-        Stream<String> employeeStream = Stream.of("1,Shamik  Mitra,Java,Architect", "2,Samir  Mitra,C++,Manager",
-                "3,Swastika  Mitra,AI,Sr.Architect");
-        EmployeeRepsitory = employeeStream.map(employeeStr -> {
+        Stream<String> employeeStream = Stream.of("1,LE SQUERE Vincent,Developer",
+                                                  "2,PROT Damien,Scrum master",
+                                                  "3,CORREIA Sebastiao,Big boss");
+        employeeRepository = employeeStream.map(employeeStr -> {
             String[] info = employeeStr.split(",");
-            return createEmployee(new Long(info[0]), info[1], info[2], info[3]);
+            return createEmployee(info[0], info[1], info[2], info[3]);
         }).collect(Collectors.toMap(Employee::getEmployeeId, emp -> emp));
     }
 
-    private static Employee createEmployee(Long id, String name, String practiceArea, String designation) {
+    private static Employee createEmployee(String id, String name, String practiceArea, String designation) {
         Employee emp = new Employee();
         emp.setEmployeeId(id);
         emp.setName(name);
@@ -32,10 +33,10 @@ public class EmployeeSearchService {
     }
 
     public Employee findById(Long id) {
-        return EmployeeRepsitory.get(id);
+        return employeeRepository.get(id);
     }
 
     public Collection<Employee> findAll() {
-        return EmployeeRepsitory.values();
+        return employeeRepository.values();
     }
 }
