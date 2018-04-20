@@ -13,9 +13,9 @@ public class EmployeeSearchService {
     private static Map<String, Employee> employeeRepository = null;
 
     static {
-        Stream<String> employeeStream = Stream.of("1,LE SQUERE Vincent,Developer",
-                                                  "2,PROT Damien,Scrum master",
-                                                  "3,CORREIA Sebastiao,Big boss");
+        Stream<String> employeeStream = Stream.of("1,LE SQUERE Vincent,Developer, DQ",
+                                                  "2,PROT Damien,Scrum master, DQ",
+                                                  "3,CORREIA Sebastiao,Big boss, DQ");
         employeeRepository = employeeStream.map(employeeStr -> {
             String[] info = employeeStr.split(",");
             return createEmployee(info[0], info[1], info[2], info[3]);
@@ -28,7 +28,7 @@ public class EmployeeSearchService {
         emp.setName(name);
         emp.setPracticeArea(practiceArea);
         emp.setDesignation(designation);
-        emp.setCompanyInfo("Cognizant");
+        emp.setCompanyInfo("Talend");
         return emp;
     }
 
