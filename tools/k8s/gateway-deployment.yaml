@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.12.0 (0ab07be)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: gateway
+  name: gateway
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: gateway
+    spec:
+      containers:
+      - env:
+        - name: EUREKA_URI
+          value: http://eureka:9091/eureka
+        - name: ZIPKIN_URI
+          value: http://zipkin:9411
+        image: gateway:1.0-SNAPSHOT
+        name: gateway
+        ports:
+        - containerPort: 9094
+        resources: {}
+      restartPolicy: Always
+status: {}

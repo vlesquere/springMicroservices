@@ -1,0 +1,43 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+ name: config-server
+ labels:
+   serviceType: config-server
+spec:
+ replicas: 1
+ strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+ template:
+   metadata:
+     name: config-server
+     labels:
+       serviceType: config-server
+   spec:
+     containers:
+       - name: config-server
+         image: config-server:1.0-SNAPSHOT
+         imagePullPolicy: Never
+         ports:
+         - containerPort: 9090
+         env:
+         - name: JAVA_OPTS
+           value: -Xmx64m -Xms64m
+         - name: SPRING_APPLICATION_NAME
+           value: "config-server"
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: config-server-entrypoint
+ namespace: default
+spec:
+ selector:
+   serviceType: config-server
+ ports:
+   - port: 9090
+     targetPort: 9090
+ type: LoadBalancer

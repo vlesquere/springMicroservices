@@ -23,7 +23,7 @@ public class EmployeeSearchController {
     private String message;
 
     @RequestMapping("/employee/find/{id}")
-    public Employee findById(@PathVariable Long id) {
+    public Employee findById(@PathVariable String id) {
         System.out.println(message);
         return employeeSearchService.findById(id);
     }

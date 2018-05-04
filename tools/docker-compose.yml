@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  configServer:
+  config-server:
     image: "config-server:1.0-SNAPSHOT"
     ports:
       - "9090:9090"
@@ -21,7 +21,7 @@ services:
       - EUREKA_URI=http://eureka:9091/eureka
       - ZIPKIN_URI=http://zipkin:9411
 
-  employeeDashboard:
+  employee-dashboard:
     image: "employee-dashboard:1.0-SNAPSHOT"
     ports:
       - "9093:9093"
@@ -33,7 +33,7 @@ services:
       - EUREKA_URI=http://eureka:9091/eureka
       - ZIPKIN_URI=http://zipkin:9411
 
-  employeeBackend:
+  employee-backend:
     image: "employee-backend:1.0-SNAPSHOT"
     ports:
       - "9092:9092"

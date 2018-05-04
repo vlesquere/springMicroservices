@@ -32,7 +32,7 @@ public class EmployeeSearchService {
         return emp;
     }
 
-    public Employee findById(Long id) {
+    public Employee findById(String id) {
         return employeeRepository.get(id);
     }
 
