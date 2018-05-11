@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: config-server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: config-server
+    spec:
+      containers:
+      - image: config-server:1.0-SNAPSHOT
+        name: config-server
+        ports:
+        - containerPort: 9090
+        resources: {}
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: config-server
+  name: config-server
+spec:
+  selector:
+    app: config-server
+  ports:
+   - port: 9090
+     targetPort: 9090
+  type: LoadBalancer

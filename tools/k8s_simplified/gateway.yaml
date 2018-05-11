@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: gateway
+  name: gateway
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: gateway
+    spec:
+      containers:
+      - env:
+        - name: EUREKA_URI
+          value: http://eureka-service:9091/eureka
+        - name: ZIPKIN_URI
+          value: http://zipkin:9411
+        image: gateway:1.0-SNAPSHOT
+        name: gateway
+        ports:
+        - containerPort: 9094
+        resources: {}
+      restartPolicy: Always
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway-service
+spec:
+  ports:
+  - name: "9094"
+    port: 9094
+    targetPort: 9094
+  selector:
+    app: gateway
+  type: LoadBalancer
+status:
+  loadBalancer: {}

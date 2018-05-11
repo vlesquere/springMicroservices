@@ -1,29 +1,25 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.version: 1.12.0 (0ab07be)
-  labels:
-    io.kompose.service: employee-backend
   name: employee-backend
+  labels:
+    serviceType: employee-backend
 spec:
   replicas: 1
   strategy: {}
   template:
     metadata:
-      creationTimestamp: null
       labels:
-        io.kompose.service: employee-backend
+        serviceType: employee-backend
     spec:
       containers:
       - env:
         - name: CLOUD_CONFIG_URI
-          value: http://configServer:9090
+          value: http://config-server:9090
         - name: EUREKA_URI
-          value: http://eureka:9091/eureka
+          value: http://eureka-service:9091/eureka
         - name: ZIPKIN_URI
-          value: http://zipkin:9411
+          value: zipkin:9411
         image: employee-backend:1.0-SNAPSHOT
         name: employee-backend
         ports:
@@ -31,3 +27,18 @@ spec:
         resources: {}
       restartPolicy: Always
 status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: employee-backend-service
+spec:
+  ports:
+  - name: "9092"
+    port: 9092
+    targetPort: 9092
+  selector:
+    serviceType: employee-backend
+  type: LoadBalancer
+status:
+  loadBalancer: {}

@@ -1,9 +1,6 @@
-apiVersion: apps/v1beta1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  labels:
-    io.kompose.service: eureka
-    serviceType: eureka
   name: eureka
 spec:
   replicas: 1
@@ -11,26 +8,23 @@ spec:
   template:
     metadata:
       labels:
-        io.kompose.service: eureka
+        app: eureka
     spec:
       containers:
       - image: eureka:1.0-SNAPSHOT
         name: eureka
-        imagePullPolicy: Never 
+        imagePullPolicy: Never
         ports:
         - containerPort: 9091
-        resources: {}
       restartPolicy: Always
-status: {}
 ---
 apiVersion: v1
 kind: Service
 metadata:
- name: eureka-entrypoint
- namespace: default
+ name: eureka-service
 spec:
  selector:
-   serviceType: eureka
+   app: eureka
  ports:
    - port: 9091
      targetPort: 9091

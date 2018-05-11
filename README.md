@@ -60,6 +60,7 @@ You have to start applications in this order :
 ## Call
 To test you can check 
 
+ - http://localhost:9090/EmployeeSearch/default : should return a list of properties
  - http://localhost:9092/employee/find/1 : should return a Json containing employee information
  - http://localhost:9093/dashboard/feign/1 : should return the same thing
  - http://localhost:9094/employeeUI/dashboard/feign/1 : should return the same thing
