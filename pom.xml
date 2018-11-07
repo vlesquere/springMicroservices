@@ -12,7 +12,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.1.RELEASE</version>
+        <version>2.1.0.RELEASE</version>
     </parent>
 
     <properties>
@@ -22,9 +22,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <spring-cloud.version>Finchley.M9</spring-cloud.version>
-        <spring-cloud.dependencies.version>2.0.0.BUILD-SNAPSHOT</spring-cloud.dependencies.version>
-        <spring-cloud.netflix>2.0.0.M8</spring-cloud.netflix>
+        <spring-cloud.version>Finchley.SR2</spring-cloud.version>
         <dockerfile-maven-version>1.4.0</dockerfile-maven-version>
     </properties>
 
